@@ -17,7 +17,7 @@ const Card = ({flipped, brightness, distance}) => {
       onAnimationEnd={() => console.log('hello')}
     >
       {flipped ? (
-        <img src="test-card.png" className={brightnessClass} width={distance} />
+        <img src="test-card.png" width={distance} />
       ) : (
         <img src="back.svg" width={distance} />
       )}
