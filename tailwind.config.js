@@ -14,12 +14,24 @@ module.exports = {
                     transform: 'rotateY(180deg)'
                 },
                 '100%': {
-                  transform: 'rotate(0deg)'
+                  transform: 'rotate'
                 }
-            },          
+            },
+            wiggleBack: {
+              '0%': {
+                  transform: 'rotateY(-90deg)'
+              },
+              '50%': {
+                  transform: 'rotateY(-180deg)'
+              },
+              '100%': {
+                transform: 'rotate'
+              }
+          },           
         },
         animation: {
-            wiggle: 'wiggle 0.5s ease-in-out',
+            wiggle: 'wiggle 0.6s ease-in-out',
+            wiggleBack: 'wiggleBack 0.6s ease-in-out',
         }
     },
 },
