@@ -1,0 +1,9 @@
+
+  .front,
+  .back {
+    backface-visibility: visible;
+    -webkit-backface-visibility: visible;
+    transform: scale(-1,1);
+    filter: brightness(1.75);
+  }
+ 
