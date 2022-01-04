@@ -27,7 +27,10 @@ module.exports = {
               '100%': {
                 transform: 'rotate'
               }
-          },           
+          },
+          colors: {
+            base: "#303390"
+          }           
         },
         animation: {
             wiggle: 'wiggle 0.6s ease-in-out',
