@@ -8,14 +8,13 @@ export default function Home() {
   const [flipping, setFlipping] = useState(false);
   const [lighting, setlighting] = useState();
   const [distance, setDistance] = useState(100);
-  const [time, setTime] = useState(6);
+  const [time, setTime] = useState(3);
   const [hideControls, setHideControls] = useState(false);
 
   const cardAssets: string[] = [
     "blue-triangle.svg",
     "green-circle.svg",
     "red-triangle.svg",
-
     "orange-triangle.svg",
     "green-square.svg",
     "blue-square.svg",
@@ -74,9 +73,20 @@ export default function Home() {
     setDistance(e.target.value);
   };
 
+  // start the flipping animation
+  useEffect(() => {
+    document.addEventListener("keyup", (e) => {
+      if (e.key === "]") {
+        setHideControls(!hideControls);
+      } else if (e.key === "l" && !flipping) {
+        setFlipping(!flipping);
+      }
+    });
+  }, [flipping]);
+
+  // switch the card asset halfway through then finish flipping animation
   useEffect(() => {
     if (flipping) {
-      const timeToWait = time * 1000;
       const milliseconds = 200;
 
       let timer = setTimeout(() => {
@@ -88,16 +98,7 @@ export default function Home() {
     }
   }, [flipping]);
 
-  useEffect(() => {
-    document.addEventListener("keyup", (e) => {
-      if (e.key === "]") {
-        setHideControls(!hideControls);
-      } else if (e.key === "l" && !flipping) {
-        setFlipping(!flipping);
-      }
-    });
-  }, [flipping]);
-
+  // when card is flipped start timer to flip back
   useEffect(() => {
     if (flipped) {
       const timeToWait = time * 1000;
@@ -164,8 +165,9 @@ export default function Home() {
               id="customRange1"
               value={time}
               onChange={(e) => handleTimeChange(e)}
+              step="0.25"
               min="1"
-              max="11"
+              max="5"
             ></input>
             <label className="mb-1 font-semibold form-label">Distance:</label>
 
