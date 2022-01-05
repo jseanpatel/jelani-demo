@@ -5,14 +5,64 @@ import Card from "../src/components/Card";
 
 export default function Home() {
   const [flipped, setFlipped] = useState(false);
-  const [brightness, setBrightness] = useState();
+  const [flipping, setFlipping] = useState(false);
+  const [lighting, setlighting] = useState();
   const [distance, setDistance] = useState(100);
   const [time, setTime] = useState(6);
   const [hideControls, setHideControls] = useState(false);
 
-  const handleBrightnessChange = (e) => {
+  const cardAssets: string[] = [
+    "blue-triangle.svg",
+    "green-circle.svg",
+    "red-triangle.svg",
+
+    "orange-triangle.svg",
+    "green-square.svg",
+    "blue-square.svg",
+    "orange-circle.svg",
+    "orange-star.svg",
+    "blue-star.svg",
+    "red-star.svg",
+    "blue-circle.svg",
+    "red-square.svg",
+    "orange-square.svg",
+    "green-star.svg",
+    "green-triangle.svg",
+  ];
+
+  const cards = cardAssets.map((asset) => (
+    <Card
+      flipped={flipped}
+      flipping={flipping}
+      lighting={lighting}
+      distance={distance}
+      cardAsset={asset}
+    />
+  ));
+
+  function shuffle(array) {
+    let currentIndex = array.length,
+      randomIndex;
+
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex],
+        array[currentIndex],
+      ];
+    }
+
+    return array;
+  }
+
+  const handlelightingChange = (e) => {
     console.log("setting level", e.target.value);
-    setBrightness(e.target.value);
+    setlighting(e.target.value);
   };
 
   const handleTimeChange = (e) => {
@@ -25,26 +75,40 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (flipped) {
-      const milliseconds = time * 1000;
-      const timer = setTimeout(() => {
-        console.log("should flip back now");
+    if (flipping) {
+      const timeToWait = time * 1000;
+      const milliseconds = 200;
+
+      let timer = setTimeout(() => {
+        setFlipping(!flipping);
         setFlipped(!flipped);
       }, milliseconds);
+
       return () => clearTimeout(timer);
     }
-  }, [flipped]);
+  }, [flipping]);
 
   useEffect(() => {
     document.addEventListener("keyup", (e) => {
       if (e.key === "]") {
         setHideControls(!hideControls);
-      }
-      if (e.key === "l") {
-        setFlipped(!flipped);
+      } else if (e.key === "l" && !flipping) {
+        setFlipping(!flipping);
       }
     });
-  }, [flipped]);
+  }, [flipping]);
+
+  useEffect(() => {
+    if (flipped) {
+      const timeToWait = time * 1000;
+      let timer = setTimeout(() => {
+        setFlipping(!flipping);
+        setFlipped(!flipped);
+      }, timeToWait);
+
+      return () => clearTimeout(timer);
+    }
+  }, [flipped])
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
@@ -54,9 +118,9 @@ export default function Home() {
       </Head>
 
       <main className="relative flex flex-col items-center self-center justify-center flex-1 w-full px-20 text-center">
-        <div className="w-0 h-0 bg-transparent animate-wiggle brightness-25"></div>
+        <div className="w-0 h-0 bg-transparent animate-wiggle lighting-25"></div>
         <div className="w-0 h-0 bg-transparent animate-wiggleBack"></div>
-        <div className="absolute p-4 text-left border-4 border-black top-14 left-14 brightness-50">
+        <div className="absolute p-4 text-left border-4 border-black top-14 left-14 lighting-50">
           <p className="text-base text-3xl font-bold text-left">
             Dr. Mel Jelani
           </p>
@@ -64,118 +128,31 @@ export default function Home() {
             Overturned Convictions
           </p>
         </div>
-        <div className="grid grid-cols-4 gap-8">
+
+        <div className="grid grid-cols-4 gap-8 ">
+          {cards}
           <Card
             flipped={flipped}
-            brightness={brightness}
+            flipping={flipping}
+            lighting={lighting}
             distance={distance}
-            cardAsset={"test-card.png"}
-          />
-          <Card
-            flipped={flipped}
-            brightness={brightness}
-            distance={distance}
-            cardAsset={"test-card.png"}
-          />
-          <Card
-            flipped={flipped}
-            brightness={brightness}
-            distance={distance}
-            cardAsset={"test-card.png"}
-          />
-          <Card
-            flipped={flipped}
-            brightness={brightness}
-            distance={distance}
-            cardAsset={"green-square.png"}
-          />
-          <Card
-            flipped={flipped}
-            brightness={brightness}
-            distance={distance}
-            cardAsset={"test-card.png"}
-          />
-          <Card
-            flipped={flipped}
-            brightness={brightness}
-            distance={distance}
-            cardAsset={"test-card.png"}
-          />
-          <Card
-            flipped={flipped}
-            brightness={brightness}
-            distance={distance}
-            cardAsset={"test-card.png"}
-          />
-          <Card
-            flipped={flipped}
-            brightness={brightness}
-            distance={distance}
-            cardAsset={"test-card.png"}
-          />
-          <Card
-            flipped={flipped}
-            brightness={brightness}
-            distance={distance}
-            cardAsset={"test-card.png"}
-          />
-          <Card
-            flipped={flipped}
-            brightness={brightness}
-            distance={distance}
-            cardAsset={"test-card.png"}
-          />
-          <Card
-            flipped={flipped}
-            brightness={brightness}
-            distance={distance}
-            cardAsset={"test-card.png"}
-          />
-          <Card
-            flipped={flipped}
-            brightness={brightness}
-            distance={distance}
-            cardAsset={"test-card.png"}
-          />
-          <Card
-            flipped={flipped}
-            brightness={brightness}
-            distance={distance}
-            cardAsset={"test-card.png"}
-          />
-          <Card
-            flipped={flipped}
-            brightness={brightness}
-            distance={distance}
-            cardAsset={"test-card.png"}
-          />
-          <Card
-            flipped={flipped}
-            brightness={brightness}
-            distance={distance}
-            cardAsset={"test-card.png"}
-          />
-          <Card
-            flipped={flipped}
-            brightness={brightness}
-            distance={distance}
-            cardAsset={"test-card.png"}
+            cardAsset={"red-circle.svg"}
           />
         </div>
 
         {!hideControls && (
-          <div className="absolute flex flex-col p-4 mx-24 ml-16 border-4 border-black -right-8">
+          <div className="absolute flex flex-col p-4 mx-24 ml-16 border-4 border-black -right-7">
             <label className="mb-4 text-2xl font-semibold underline form-label">
               Noise Factors:
             </label>
-            <label className="mb-1 font-semibold form-label">Brightness:</label>
+            <label className="mb-1 font-semibold form-label">Lighting:</label>
 
             <input
               type="range"
               className="h-6 p-0 mb-4 bg-blue-100 appearance-none w-72 focus:outline-none focus:ring-0 focus:shadow-none"
               id="customRange1"
-              value={brightness}
-              onChange={(e) => handleBrightnessChange(e)}
+              value={lighting}
+              onChange={(e) => handlelightingChange(e)}
               min="0"
               max="10"
             ></input>

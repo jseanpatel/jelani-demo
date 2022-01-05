@@ -8,24 +8,19 @@ module.exports = {
         keyframes: {
             wiggle: {
                 '0%': {
-                    transform: 'rotateY(90deg)'
+                    transform: 'rotateY(0deg)'
                 },
-                '50%': {
-                    transform: 'rotateY(180deg)'
-                },
+           
                 '100%': {
-                  transform: 'rotate'
+                  transform: 'rotateY(90deg)'
                 }
             },
             wiggleBack: {
               '0%': {
-                  transform: 'rotateY(-90deg)'
-              },
-              '50%': {
-                  transform: 'rotateY(-180deg)'
+                  transform: 'rotateY(90deg)'
               },
               '100%': {
-                transform: 'rotate'
+                transform: 'rotateY(0deg)'
               }
           },
           colors: {
@@ -33,8 +28,8 @@ module.exports = {
           }           
         },
         animation: {
-            wiggle: 'wiggle 0.6s ease-in-out',
-            wiggleBack: 'wiggleBack 0.6s ease-in-out',
+            wiggle: 'wiggle 0.2s ease-in-out',
+            wiggleBack: 'wiggleBack 0.2s ease-in-out',
         }
     },
 },

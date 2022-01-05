@@ -9,7 +9,7 @@ var classNames = require('classnames');
 // }
 // { title, text, type }: Props
 
-const Card = ({ flipped, brightness, distance, cardAsset }) => {
+const Card = ({ flipped, lighting, distance, cardAsset, flipping }) => {
   const [selected, setSelected] = useState(false);
 
   return (
@@ -17,10 +17,10 @@ const Card = ({ flipped, brightness, distance, cardAsset }) => {
       className={classNames(
         "bg-blue-500 p-4 text-white rounded hover:shadow-xl hover:brightness-50",
         {
-          "animate-wiggle": flipped, // if success={true}, 'success' is added
-          "animate-wiggleBack": !flipped,
-          "brightness-50": selected,
-          "brightness-100": !selected
+          "animate-wiggle": flipping, // if success={true}, 'success' is added
+          "animate-wiggleBack": !flipping,
+          "lighting-50": selected,
+          "lighting-100": !selected
         }
       )}
       onAnimationEnd={() => console.log("hello")}
@@ -29,7 +29,7 @@ const Card = ({ flipped, brightness, distance, cardAsset }) => {
       {flipped ? (
         <img src={cardAsset} width={distance} />
       ) : (
-        <img src="back.svg" width={distance} />
+        <img src="back-card.svg" width={distance} />
       )}
     </button>
   );
