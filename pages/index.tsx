@@ -85,7 +85,7 @@ export default function Home() {
       } else if (e.key === "l" && !flipping) {
         setFlipping(!flipping);
       } else if (e.key === "'" && !flipping) {
-        // reset values to defaults
+        // reset values to defaults;
         // setDistance(100);
         // setTime(5);
         // setLighting(100);
@@ -111,6 +111,7 @@ export default function Home() {
     if (flipped) {
       const timeToWait = time * 1000;
       let timer = setTimeout(() => {
+        // notice we don't directly switch flipped as that logic is abstracted away
         setFlipping(!flipping);
       }, timeToWait);
 
