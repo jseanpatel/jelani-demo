@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 var classNames = require("classnames");
 
 // interface Props {
@@ -11,15 +11,16 @@ var classNames = require("classnames");
 const Card = ({ flipped, lighting, distance, cardAsset, flipping}) => {
   const [selected, setSelected] = useState(false);
 
+
   return (
     <button
       className={classNames(
-        "bg-blue-500 p-4 text-white rounded hover:shadow-xl",
+        "p-4 text-white rounded hover:shadow-xl",
         {
           "animate-wiggle": flipping, // if flipping={true}, 'animate-wiggle' is added
           "animate-wiggleBack": !flipping,
-          "w-4": selected,
-          "w-8": !selected,
+          "": selected,
+          "": !selected,
         }
       )}
       onClick={() => setSelected(!selected)}

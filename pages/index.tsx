@@ -6,12 +6,12 @@ import Card from "../src/components/Card";
 export default function Home() {
   const [flipped, setFlipped] = useState(false);
   const [flipping, setFlipping] = useState(false);
-  const [lighting, setlighting] = useState(100);
+  const [lighting, setLighting] = useState(100);
+  const [time, setTime] = useState(5);
   const [distance, setDistance] = useState(100);
-  const [time, setTime] = useState(4);
   const [hideControls, setHideControls] = useState(false);
 
-  const test = "bg-red-" + lighting
+  const test = "brightness-" + lighting;
 
   const cardAssets: string[] = [
     "blue-triangle.svg",
@@ -21,10 +21,10 @@ export default function Home() {
     "green-square.svg",
     "blue-square.svg",
     "orange-circle.svg",
-    "orange-star.svg",
     "blue-star.svg",
     "red-star.svg",
     "blue-circle.svg",
+    "orange-star.svg",
     "red-square.svg",
     "orange-square.svg",
     "green-star.svg",
@@ -63,7 +63,7 @@ export default function Home() {
 
   const handleLightingChange = (e) => {
     console.log("setting level", e.target.value);
-    setlighting(e.target.value);
+    setLighting(e.target.value);
   };
 
   const handleTimeChange = (e) => {
@@ -78,10 +78,17 @@ export default function Home() {
   // start the flipping animation
   useEffect(() => {
     document.addEventListener("keyup", (e) => {
-      if (e.key === "]") {
-        setHideControls(!hideControls);
+      if (e.key === "[") {
+        setHideControls(true);
+      } else if (e.key === "]") {
+        setHideControls(false)
       } else if (e.key === "l" && !flipping) {
         setFlipping(!flipping);
+      } else if (e.key === "'" && !flipping) {
+        // reset values to defaults
+        // setDistance(100);
+        // setTime(5);
+        // setLighting(100);
       }
     });
   }, [flipping]);
@@ -90,7 +97,6 @@ export default function Home() {
   useEffect(() => {
     if (flipping) {
       const milliseconds = 200;
-
       let timer = setTimeout(() => {
         setFlipping(!flipping);
         setFlipped(!flipped);
@@ -106,7 +112,6 @@ export default function Home() {
       const timeToWait = time * 1000;
       let timer = setTimeout(() => {
         setFlipping(!flipping);
-        setFlipped(!flipped);
       }, timeToWait);
 
       return () => clearTimeout(timer);
@@ -121,8 +126,8 @@ export default function Home() {
       </Head>
 
       <main className="relative flex flex-col items-center self-center justify-center flex-1 w-full px-20 text-center ">
-        <div className="w-0 h-0 bg-transparent animate-wiggle brightness-[0.1]"></div>
-        <div className="w-0 h-0 bg-transparent animate-wiggleBack"></div>
+        <div className="w-0 h-0 bg-transparent bg-gray-200 animate-wiggle brightness-25 brightness-30 brightness-35 brightness-40 brightness-45 brightness-50 brightness-55 brightness-60 brightness-65 brightness-70 brightness-75 brightness-80 brightness-85 brightness-90 brightness-95 brightness-105 brightness-110 brightness-115 brightness-120 brightness-125 brightness-130 brightness-135 brightness-140 brightness-145 brightness-150 brightness-155 brightness-160 brightness-165 brightness-170 brightness-175"></div>
+        <div className="w-0 h-0 bg-transparent bg-red-500 flipping animate-wiggleBack"></div>
         <div className="absolute p-4 text-left border-4 border-black top-14 left-14">
           <p className="text-base text-3xl font-bold text-left">
             Dr. Mel Jelani
@@ -153,9 +158,9 @@ export default function Home() {
               id="customRange1"
               value={lighting}
               onChange={(e) => handleLightingChange(e)}
-              step="100"
-              min="100"
-              max="1000"
+              step="5"
+              min="25"
+              max="175"
             ></input>
             <label className="mb-1 font-semibold form-label">Time:</label>
             <input
@@ -166,7 +171,7 @@ export default function Home() {
               onChange={(e) => handleTimeChange(e)}
               step="0.25"
               min="1"
-              max="7"
+              max="9"
             ></input>
             <label className="mb-1 font-semibold form-label">Distance:</label>
             <input
@@ -175,8 +180,8 @@ export default function Home() {
               id="customRange1"
               value={distance}
               onChange={(e) => handleDistanceChange(e)}
-              min="20"
-              max="180"
+              min="30"
+              max="170"
             ></input>
           </div>
         )}
