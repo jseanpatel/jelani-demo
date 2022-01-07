@@ -160,8 +160,8 @@ export default function Home() {
               value={lighting}
               onChange={(e) => handleLightingChange(e)}
               step="5"
-              min="25"
-              max="175"
+              min="30"
+              max="170"
             ></input>
             <label className="mb-1 font-semibold form-label">Time:</label>
             <input
@@ -181,8 +181,8 @@ export default function Home() {
               id="customRange1"
               value={distance}
               onChange={(e) => handleDistanceChange(e)}
-              min="30"
-              max="170"
+              min="40"
+              max="160"
             ></input>
           </div>
         )}
