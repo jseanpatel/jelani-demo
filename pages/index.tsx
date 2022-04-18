@@ -10,6 +10,7 @@ export default function Home() {
   const [time, setTime] = useState(5);
   const [distance, setDistance] = useState(100);
   const [hideControls, setHideControls] = useState(false);
+  const [hideInstructions, setHideInstructions] = useState(false);
 
   const test = "brightness-" + lighting;
 
@@ -82,14 +83,18 @@ export default function Home() {
       if (e.key === "[") {
         setHideControls(true);
       } else if (e.key === "]") {
-        setHideControls(false)
-      } else if (e.key === "l" && !flipping) {
+        setHideControls(false);
+      } else if (e.key === ";" && !flipping) {
         setFlipping(!flipping);
       } else if (e.key === "'" && !flipping) {
         // reset values to defaults;
         // setDistance(100);
         // setTime(5);
         // setLighting(100);
+      } else if (e.key === "-" && !flipping) {
+        setHideInstructions(true)
+      } else if (e.key === "=" && !flipping) {
+        setHideInstructions(false)
       }
     });
   }, [flipping]);
@@ -185,6 +190,32 @@ export default function Home() {
               min="40"
               max="160"
             ></input>
+          </div>
+        )}
+        {!hideInstructions && (
+          <div className="absolute flex flex-col p-4 mx-24 ml-16 border-4 border-black mt-[550px] -right-7 px-[4.025rem]">
+            <p className="mb-4 text-2xl font-semibold underline form-label">
+              Controls
+            </p>
+            <p className="mb-1 font-semibold form-label">
+              Flip cards: <span className="ml-4">";"</span>
+            </p>
+
+            <p className="mb-1 font-semibold form-label">
+              Show noise factors: <span className="ml-4">"["</span>
+            </p>
+
+            <p className="mb-1 font-semibold form-label">
+              Hide noise factors: <span className="ml-4">"]"</span>
+            </p>
+
+            <p className="mb-1 font-semibold form-label">
+              Show controls: <span className="ml-4">"-"</span>
+            </p>
+
+            <p className="mb-1 font-semibold form-label">
+              Hide controls: <span className="ml-4">"="</span>
+            </p>
           </div>
         )}
       </main>
