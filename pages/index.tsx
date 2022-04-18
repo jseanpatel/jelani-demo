@@ -31,8 +31,9 @@ export default function Home() {
     "green-triangle.svg",
   ];
 
-  const cards = cardAssets.map((asset) => (
+  const cards = cardAssets.map((asset, index) => (
     <Card
+      key={index}
       flipped={flipped}
       flipping={flipping}
       lighting={lighting}
